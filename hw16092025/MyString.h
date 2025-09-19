@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+using namespace std;
 
 class MyString
 {
@@ -7,18 +8,19 @@ class MyString
     int length;
 
 public:
-    MyString();                        
-    MyString(int size);               
-    MyString(const char* st);          
-    MyString(const MyString& obj);     
+    MyString();                         
+    MyString(int size);                 
+    MyString(const char* st);           
+    MyString(const MyString& obj);      
+    MyString(MyString&& obj);           
     ~MyString();                       
 
-    void Print();                      
-    bool MyStrStr(const char* s);     
+    void Print();                       
+    bool MyStrStr(const char* s);      
     void MyStrcpy(MyString& obj);      
     int MyChr(char c);                
     int MyStrLen();                   
-    void MyStrCat(MyString& b);        
+    void MyStrCat(MyString& b);       
     void MyDelChr(char c);            
-    int MyStrCmp(MyString& b);         
+    int MyStrCmp(MyString& b);        
 };
