@@ -1,9 +1,6 @@
 #include "MyString.h"
 #include <cstring>   
 
-using namespace std;
-
-
 MyString::MyString()
 {
     length = 80;
@@ -28,6 +25,18 @@ MyString::MyString(const MyString& obj)
     length = obj.length;
     str = new char[length + 1];
     strcpy_s(str, length + 1, obj.str);
+    cout << "Copy constructor\n";
+}
+
+MyString::MyString(MyString&& obj)
+{
+    length = obj.length;
+    str = obj.str;
+
+    obj.length = 0;
+    obj.str = nullptr;
+
+    cout << "Move constructor\n";
 }
 
 MyString::~MyString()
@@ -35,18 +44,18 @@ MyString::~MyString()
     delete[] str;
 }
 
-
 void MyString::Print()
 {
-    cout << str << endl;
+    if (str)
+        cout << str << endl;
+    else
+        cout << "Empty" << endl;
 }
-
 
 bool MyString::MyStrStr(const char* s)
 {
     return strstr(str, s) != nullptr;
 }
-
 
 void MyString::MyStrcpy(MyString& obj)
 {
@@ -56,11 +65,6 @@ void MyString::MyStrcpy(MyString& obj)
     strcpy_s(obj.str, length + 1, str);
 }
 
-
-
-
-
-
 int MyString::MyChr(char c)
 {
     for (int i = 0; i < length; i++)
@@ -69,15 +73,14 @@ int MyString::MyChr(char c)
         {
             return i;
         }
-        return 0;
     }
+    return -1;
 }
 
 int MyString::MyStrLen()
 {
     return length;
 }
-
 
 void MyString::MyStrCat(MyString& b)
 {
